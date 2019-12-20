@@ -4,16 +4,25 @@ import CharacterCard from "./CharacterCard"
 
 const SearchForm = () =>{
   const [characters,setCharacters] = useState([]);
+  const [origins,setOrigins] = useState([]);
   const [query, setQuery] = useState("");
+  const [orginsQuery, setOrginsQuery] = useState("");
+  let isOrginSearch = false;
+
   useEffect(() => {
     axios
       .get('https://rickandmortyapi.com/api/character/')
       .then(response => {
         const data = response.data.results;
-        const result = data.filter(char =>
+        const resultName = data.filter(char =>
           char.name.toLowerCase().includes(query.toLowerCase())
         );
-        setCharacters(result);
+        const resultOrigin = data.filter(char =>
+          char.origin.name.toLowerCase().includes(orginsQuery.toLowerCase())
+       
+        );
+        setCharacters(resultName);
+        setOrigins(resultOrigin);
       });
   }, [query]);
 
@@ -21,7 +30,11 @@ const SearchForm = () =>{
     setQuery(event.target.value);
   }
 
-  console.log(characters)
+  const handleOriginInputChange = event => {
+    isOrginSearch = true;
+    setOrginsQuery(event.target.value);
+  }
+
  return(
     <div className="characters">
       <form className="search">
@@ -33,6 +46,16 @@ const SearchForm = () =>{
           tabIndex="0"
           className="prompt search-name"
           placeholder="search by name"
+          autoComplete="off"
+        />
+         <input
+          type="text"
+          onChange={handleOriginInputChange}
+          value={orginsQuery}
+          name="origin"
+          tabIndex="0"
+          className="prompt search-name"
+          placeholder="search by origin"
           autoComplete="off"
         />
       </form>
