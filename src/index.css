@@ -37,3 +37,12 @@ main {
 header h1 {
   text-align: center;
 }
+
+.character{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding:2%;
+  margin-bottom: 78%;
+
+}

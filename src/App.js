@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./components/Header.js";
 import CharacterList from "./components/CharacterList";
 import WelcomePage from "./components/WelcomePage";
+import SearchForm from "./components/SearchForm";
 import {
   BrowserRouter as Router,
   Route,
@@ -21,6 +22,10 @@ export default function App() {
         <Route path="/characters">
           <CharacterList/>
         </Route>
+        <Route path="/search">
+          <SearchForm/>
+        </Route>
+
 
       </Switch>
       
